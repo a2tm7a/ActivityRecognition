@@ -1,19 +1,12 @@
 
 # coding: utf-8
 
-# In[1]:
 
 import pandas as pd
 import numpy as np
 
 
-# In[2]:
-
-#np.set_printoptions(threshold=np.nan)
-
-
-# In[3]:
-
+# Read all the participants and sort them
 files=[]
 import os
 for file in os.listdir("./DataSet"):
@@ -24,10 +17,7 @@ print(files)
     
 
 
-# # FORMATTING THE DATA
-
-# In[4]:
-
+# FORMATTING THE DATA
 mapping = {'walking': 0, 'standing': 1, 'jogging': 2, 'sitting': 3, 'biking': 4, 'upstairs': 5, 'downstairs': 6}
 
 training_data=None
@@ -35,6 +25,7 @@ training_output=None
 testing_data=None
 testing_output=None
 
+# No of training participants
 ratio=7
 
 count=0
@@ -49,7 +40,7 @@ for file in files:
         dff['activity'] = df['Activity']
         
         dff=dff.replace({'activity': mapping})
-        
+
         if data is None:
             data=dff.as_matrix()
         else:
@@ -66,36 +57,39 @@ for file in files:
     index=0
     data_flag = False
     
-    
     print("Clubbing data")
     while data_flag!=True:
-        while data[index+window_size -1][12] == label and data_flag!=True:
+        while int(data[index+window_size -1][12]) == int(label) and data_flag!=True:
+
             if linear_data_x is None:
-                linear_data_x = data[i:i+window_size,:12].ravel()
-                linear_data_y = label
+                linear_data_x = data[index:index+window_size,:12].ravel()
+                linear_data_y = int(label)
+                
             else:
-                linear_data_x = np.vstack((linear_data_x,data[i:i+window_size,:12].ravel()))
-                linear_data_y = np.hstack((linear_data_y,label))
-            
+                linear_data_x = np.vstack((linear_data_x,data[index:index+window_size,:12].ravel()))
+                linear_data_y = np.hstack((linear_data_y,int(label)))
+                #print(index,index+window_size-1,int(label))
             index+=window_shift
             
             if index>= data.shape[0] or index+window_size>=data.shape[0]:
                 data_flag=True
+
                 break
         
         label+=1
         print(index,label)
         #print(label)
         
-        if label == 7:
+        if int(label) == 7:
             label=0
         
-        else:
-            #print(label,data[index][12])
-            while data[index][12] != label:
-                index+=1
-                #if index%1000 == 0:
-                    #print(index,data[index][12],label)
+        #print(label,data[index][12])
+        while int(data[index][12]) != int(label):
+            #print(index,int(data[index][12]),int(label))
+            index+=1
+            if index >= data.shape[0]:
+                data_flag = True
+                break 
     
     #print(count)
     if count<=ratio:
@@ -118,8 +112,6 @@ for file in files:
         print(testing_data.shape,testing_output.shape)
 
 
-# In[5]:
-
 import h5py
 h5f = h5py.File('preprocessed_data_winSize100_winShift10.h5', 'w')
 h5f.create_dataset('training_data', data=training_data)
@@ -128,50 +120,11 @@ h5f.create_dataset('training_output', data=training_output)
 h5f.create_dataset('testing_output', data=testing_output)
 
 
-# In[6]:
-
 h5f.close()
-
-
-# In[7]:
 
 h5f = h5py.File('preprocessed_data_winSize100_winShift10.h5','r')
 b = h5f['testing_data'][:]
 print(b.shape)
 
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
 print(np.mean(training_data,axis=0),np.std(training_data,axis=0))
 print(np.mean(testing_data,axis=0),np.std(testing_data,axis=0))
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-

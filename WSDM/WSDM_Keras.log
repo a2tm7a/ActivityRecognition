@@ -1,0 +1,99 @@
+Parameters
+
+
+Iteration:1
+Learning Rate: 0.0001
+Updating the weights
+
+
+Iteration:2
+Learning Rate: 0.0001
+Parameters
+
+
+Iteration:1
+Learning Rate: 0.0001
+Updating the weights
+
+
+Iteration:2
+Learning Rate: 0.0001
+Updating the weights
+
+
+Iteration:3
+Learning Rate: 0.0001
+Updating the weights
+
+
+Iteration:4
+Learning Rate: 0.0001
+Updating the weights
+
+
+Iteration:5
+Learning Rate: 0.0001
+Reducing the learning rate by half
+Parameters
+
+
+Iteration:1
+Learning Rate: 0.0001
+Updating the weights
+
+
+Iteration:2
+Learning Rate: 0.0001
+Reducing the learning rate by half
+
+
+Iteration:2
+Learning Rate: 5e-05
+Updating the weights
+
+
+Iteration:3
+Learning Rate: 5e-05
+Reducing the learning rate by half
+
+
+Iteration:3
+Learning Rate: 2.5e-05
+Reducing the learning rate by half
+
+
+Iteration:3
+Learning Rate: 1.25e-05
+Reducing the learning rate by half
+
+
+Iteration:3
+Learning Rate: 6.25e-06
+Reducing the learning rate by half
+Parameters
+Parameters
+
+
+Iteration:1
+Learning Rate: 0.0001
+Updating the weights
+
+
+Iteration:2
+Learning Rate: 0.0001
+Reducing the learning rate by half
+
+
+Iteration:2
+Learning Rate: 5e-05
+Reducing the learning rate by half
+
+
+Iteration:2
+Learning Rate: 2.5e-05
+Reducing the learning rate by half
+
+
+Iteration:2
+Learning Rate: 1.25e-05
+Reducing the learning rate by half

@@ -1,20 +1,26 @@
 
 # coding: utf-8
 
-# In[3]:
+# In[1]:
 
 import h5py
 import numpy as np
 np.random.seed(1337)
+from keras.optimizers import SGD
 
 
-# In[7]:
+# In[2]:
 
 h5f = h5py.File('preprocessed_data_winSize100_winShift10.h5','r')
 training_data = h5f['training_data'][:]
 training_output = h5f['training_output'][:]
 testing_data = h5f['testing_data'][:]
 testing_output = h5f['testing_output'][:]
+
+h5f = h5py.File('preprocessed_data_winSize100_winShift10_mean_sd.h5','r')
+mean = h5f['mean'][:]
+sd = h5f['sd'][:]
+h5f.close()
 
 print(training_data.shape,training_output.shape,testing_data.shape,testing_output.shape)
 
@@ -51,8 +57,8 @@ print(training_data.shape,training_output.shape,testing_data.shape,testing_outpu
 
 # In[8]:
 
-testing_data=(testing_data-np.mean(training_data,axis=0))/np.std(training_data,axis=0)
-training_data=(training_data-np.mean(training_data,axis=0))/np.std(training_data,axis=0)
+testing_data=testing_data-mean
+training_data=training_data-sd
 
 
 # In[17]:
@@ -60,7 +66,11 @@ training_data=(training_data-np.mean(training_data,axis=0))/np.std(training_data
 
 batch_size = 512
 nb_classes = 7
-nb_epoch = 5
+nb_epoch = 10
+lr = 0.00005
+
+sgd = SGD(lr=lr)
+
 training_data = training_data.astype('float32')
 testing_data = testing_data.astype('float32')
 
@@ -94,7 +104,7 @@ model.summary()
 # In[19]:
 
 model.compile(loss='categorical_crossentropy',
-              optimizer=RMSprop(),
+              optimizer=sgd,
               metrics=['accuracy'])
 
 history = model.fit(training_data, Y_train,
