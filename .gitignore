@@ -1,3 +1,4 @@
-./DataSet/*
-./DataSet/WISDM_ar_v1.1/*
+/Dataset/
 .ipynb_checkpoints/*
+*/.ipynb_checkpoints/*
+*.h5

@@ -6,13 +6,13 @@ import logging
 
 # In[2]:
 
-h5f = h5py.File('preprocessed_data_winSize100_winShift10.h5','r')
+h5f = h5py.File('../preprocessed_data_winSize100_winShift10.h5','r')
 training_data = h5f['training_data'][:]
 training_output = h5f['training_output'][:]
 testing_data = h5f['testing_data'][:]
 testing_output = h5f['testing_output'][:]
 
-h5f = h5py.File('preprocessed_data_winSize100_winShift10_mean_sd.h5','r')
+h5f = h5py.File('../preprocessed_data_winSize100_winShift10_mean_sd.h5','r')
 mean = h5f['mean'][:]
 sd = h5f['sd'][:]
 h5f.close()

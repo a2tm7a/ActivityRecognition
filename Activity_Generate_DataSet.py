@@ -9,7 +9,7 @@ import numpy as np
 # Read all the participants and sort them
 files=[]
 import os
-for file in os.listdir("./DataSet"):
+for file in os.listdir("./Dataset"):
     if file.endswith(".csv"):
         files.append(file)
 files.sort()
@@ -31,12 +31,12 @@ ratio=7
 count=0
 for file in files:
     count+=1
-    df = pd.read_csv('./DataSet/'+file, index_col=False, header=1);  
+    df = pd.read_csv('./Dataset/'+file, index_col=False, header=1);  
     #print(df.describe())
     print(file)
     data=None
-    for i in range(1,6):
-        dff=df.ix[:,14*i-13:14*i-1]
+    for i in range(1,3):
+        dff=df.ix[:,14*i-13:14*i-10]
         dff['activity'] = df['Activity']
         
         dff=dff.replace({'activity': mapping})
@@ -59,14 +59,14 @@ for file in files:
     
     print("Clubbing data")
     while data_flag!=True:
-        while int(data[index+window_size -1][12]) == int(label) and data_flag!=True:
+        while int(data[index+window_size -1][3]) == int(label) and data_flag!=True:
 
             if linear_data_x is None:
-                linear_data_x = data[index:index+window_size,:12].ravel()
+                linear_data_x = data[index:index+window_size,:3].ravel()
                 linear_data_y = int(label)
                 
             else:
-                linear_data_x = np.vstack((linear_data_x,data[index:index+window_size,:12].ravel()))
+                linear_data_x = np.vstack((linear_data_x,data[index:index+window_size,:3].ravel()))
                 linear_data_y = np.hstack((linear_data_y,int(label)))
                 #print(index,index+window_size-1,int(label))
             index+=window_shift
@@ -84,7 +84,7 @@ for file in files:
             label=0
         
         #print(label,data[index][12])
-        while int(data[index][12]) != int(label):
+        while int(data[index][3]) != int(label):
             #print(index,int(data[index][12]),int(label))
             index+=1
             if index >= data.shape[0]:
