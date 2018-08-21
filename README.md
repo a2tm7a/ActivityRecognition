@@ -14,7 +14,8 @@
 * Step 3 - Using prediction model on smartphones (offline) 
 
 ### STEP 1 - DATA GENERATION
-<img src="icon.png" align="right" />
+<img src="Other/data_collect.png" align="right" />
+
 * Android application developed to generate data
 * Collected data of each activity for 10-15 mins from seven android phones.
 
@@ -34,10 +35,10 @@
                                     *NDK - Native Development Kit
            
 ## TECHNICAL ARCHITECTURE
-<img src="icon.png" align="center" />
+<img src="Other/architecture.png" align="center" />
 
 ## CURRENT DATA FLOW DIAGRAM
-<img src="icon.png" align="center" />
+<img src="Other/data_flow.png" align="center" />
 
 ## WALKING DATA EXAMPLE
-<img src="icon.png" align="center" />
+<img src="Other/walking.png" align="center" />
